@@ -16,6 +16,7 @@ class App extends React.Component {
             currentSearchString: '',
             newEmail: false,
             lastID: null,
+            sendEmailBody: {}
         }
     }
 
@@ -44,6 +45,18 @@ class App extends React.Component {
         this.setState({ newEmail: true });
     }
 
+    sendEmail = (body) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        };
+        fetch('http://localhost:3001/send', requestOptions)
+            .then(response => response.json())
+            .then(response => alert(response.message) )
+
+    }
+
     render() {
         return (
             <div className="App">
@@ -61,7 +74,7 @@ class App extends React.Component {
                 </aside>
                 <main>
                     {this.state.newEmail ?
-                        <NewEmail /> :
+                        <NewEmail sendEmail={this.sendEmail} /> :
                         <EmailDisplay
                             emails={this.state.filterArr}
                             id={this.state.currentEmailId}

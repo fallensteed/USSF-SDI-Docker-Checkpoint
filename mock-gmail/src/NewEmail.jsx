@@ -33,6 +33,13 @@ class NewEmail extends React.Component {
         e.preventDefault();
         const nowDTG = new Date().toISOString();
         this.setState({ date: nowDTG });
+        let body = {
+            sender: this.state.sender,
+            recipient: this.state.recipient,
+            subject: this.state.subject,
+            message: this.state.message
+        }
+        this.props.sendEmail(body);
     }
 
     render() {
