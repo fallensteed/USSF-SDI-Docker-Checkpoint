@@ -7,11 +7,11 @@ const port = 3001
 
 const Pool = require('pg').Pool;
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'email_server',
-    password: 'Zedila01',
-    port: 5432
+    user: 'admin',
+    host: 'database',
+    database: 'emails',
+    password: 'admin',
+    port: 5432,
 })
 
 app.use(bodyParser.json())
@@ -63,7 +63,7 @@ app.post('/send', function (req, res) {
     let result;
     const emailSender = req.body;
     if (emailSender.sender && emailSender.recipient && emailSender.subject && emailSender.message) {
-        pool.query('INSERT INTO emails (sender, recipient, subject, message, date) VALUES ($1, $2, $3, $4, NOW)', [emailSender.sender, emailSender.recipient, emailSender.subject, emailSender.message], (error, results) => {
+        pool.query('INSERT INTO emails (sender, recipient, subject, message, date) VALUES ($1, $2, $3, $4, $5)', [emailSender.sender, emailSender.recipient, emailSender.subject, emailSender.message, new Date().toISOString()], (error, results) => {
             if (error) {
                 throw error;
             }
