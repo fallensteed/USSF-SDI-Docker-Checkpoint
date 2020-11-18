@@ -1,3 +1,3 @@
-# USSF-SDI-React-Checkpoint
+# USSF-SDI-Docker-Checkpoint
 
-usaf-sdi-react-checkpoint json file/server not included and needs to be running at localhost:3001 for app to function properly.
+
